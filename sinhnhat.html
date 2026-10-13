@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thư sinh nhật Bảo Khang 💌</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #160b36, #762c87, #ef6baf);
+    font-family: "Segoe UI", sans-serif;
+    color: white;
+    text-align: center;
+}
+
+#fireworks {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(#ffd0f0 1px, transparent 1px);
+    background-size: 45px 45px, 75px 75px;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    to { opacity: .35; }
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 15px;
+}
+
+#envelopeScreen {
+    animation: appear 1s ease;
+}
+
+.envelope {
+    font-size: 120px;
+    cursor: pointer;
+    animation: float 1.5s infinite ease-in-out;
+    filter: drop-shadow(0 0 20px #ffb8e8);
+}
+
+@keyframes float {
+    50% { transform: translateY(-12px); }
+}
+
+h1 {
+    color: #ffe4f4;
+    text-shadow: 0 0 20px #ff5dc5;
+    font-size: clamp(27px, 7vw, 42px);
+    margin: 15px 0;
+}
+
+.subtitle {
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+button {
+    border: none;
+    border-radius: 35px;
+    padding: 14px 28px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #8d286e;
+    background: #fff0fa;
+    box-shadow: 0 0 22px #ffb0e5;
+    transition: .3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+    background: #ffd4ef;
+}
+
+#letter {
+    display: none;
+    width: min(100%, 520px);
+    padding: 30px 22px;
+    border: 1px solid #ffffff80;
+    border-radius: 25px;
+    background: #ffffff20;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px #ff8bdd65;
+}
+
+#letter.open {
+    display: block;
+    animation: openLetter 1s ease;
+}
+
+@keyframes openLetter {
+    from {
+        opacity: 0;
+        transform: scale(.65) translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.cake {
+    font-size: 65px;
+    margin-bottom: 10px;
+}
+
+.name {
+    color: #fff0a8;
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: bold;
+    margin: 18px 0;
+}
+
+.date {
+    display: inline-block;
+    padding: 9px 23px;
+    border-radius: 30px;
+    background: #ffffff28;
+    color: #fff4b6;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.message {
+    font-size: 16px;
+    line-height: 2;
+}
+
+.signature {
+    color: #ffd5f0;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.balloon {
+    position: fixed;
+    bottom: -100px;
+    font-size: 38px;
+    z-index: 1;
+    pointer-events: none;
+    animation: rise 9s linear infinite;
+}
+
+@keyframes rise {
+    to { transform: translateY(-120vh) rotate(20deg); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+<canvas id="fireworks"></canvas>
+
+<!--
+ĐẶT FILE NHẠC CỦA BẠN CÙNG THƯ MỤC VỚI FILE HTML.
+Đổi "nhac-cua-toi.mp3" thành tên file nhạc của bạn.
+-->
+<audio id="myMusic" src="sinhnhat.mp3"
+       preload="auto" loop></audio>
+
+<div class="container">
+
+    <!-- MÀN HÌNH BAN ĐẦU -->
+    <div id="envelopeScreen">
+        <div class="envelope" onclick="openLetter()">💌</div>
+
+        <h1>BẠN CÓ MỘT BỨC THƯ!</h1>
+
+        <div class="subtitle">
+            Một món quà đặc biệt đang chờ bạn... 💗<br>
+            Hãy mở thư để khám phá nhé!
+        </div>
+
+        <button onclick="openLetter()">💌 NHẬN THƯ 💌</button>
+    </div>
+
+    <!-- NỘI DUNG BỨC THƯ -->
+    <div id="letter">
+        <div class="cake">🎂</div>
+
+        <h1>HAPPY BIRTHDAY!</h1>
+
+        <div class="name">🎉 Nguyễn Đa Bảo Khang 🎉</div>
+
+        <div class="date">14 . 10</div>
+
+        <div class="message">
+            💖 Chúc mừng sinh nhật Bảo Khang! 💖<br><br>
+
+            Chúc bạn tuổi mới luôn vui vẻ,<br>
+            mạnh khỏe, hạnh phúc và may mắn.<br>
+
+            Mong mọi ước mơ đều thành hiện thực,<br>
+            học tập ngày càng tiến bộ<br>
+            và mỗi ngày đều có thật nhiều niềm vui! ✨<br><br>
+
+            🎁 Chúc bạn có một sinh nhật thật đáng nhớ! 🎁
+        </div>
+
+        <div class="signature">
+            💗 Gửi đến bạn những lời chúc tốt đẹp nhất 💗
+        </div>
+    </div>
+
+</div>
+
+<script>
+let started = false;
+
+// MỞ THƯ: nhạc, pháo hoa và hiệu ứng khởi chạy cùng lúc
+async function openLetter() {
+    if (started) return;
+    started = true;
+
+    document.getElementById("envelopeScreen").classList.add("hidden");
+
+    const letter = document.getElementById("letter");
+    letter.classList.add("open");
+
+    // Phát file nhạc bạn chọn
+    const music = document.getElementById("myMusic");
+    music.volume = 0.8;
+
+    try {
+        await music.play();
+    } catch (error) {
+        alert(
+            "Chưa phát được nhạc! Hãy kiểm tra tên file MP3 " +
+            "và đặt file nhạc cùng thư mục với file HTML nhé."
+        );
+    }
+
+    // Bắt đầu pháo hoa liên tục
+    startFireworks();
+    launchBalloon();
+}
+
+// PHÁO HOA CANVAS
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+let W, H;
+let particles = [];
+let rockets = [];
+
+function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+window.addEventListener("resize", resize);
+resize();
+
+function launchRocket() {
+    const x = W * (.12 + Math.random() * .76);
+    const targetY = H * (.12 + Math.random() * .42);
+
+    rockets.push({
+        x: x,
+        y: H + 5,
+        targetY: targetY,
+        speed: 6 + Math.random() * 3,
+        hue: Math.random() * 360
+    });
+}
+
+function explode(x, y, hue) {
+    // Âm thanh nổ mô phỏng bằng Web Audio
+    playBang();
+
+    for (let i = 0; i < 100; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 1 + Math.random() * 5;
+
+        particles.push({
+            x: x,
+            y: y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            life: 1,
+            decay: .009 + Math.random() * .012,
+            hue: hue + Math.random() * 45,
+            size: 1.5 + Math.random() * 2.5
+        });
+    }
+}
+
+let audioCtx;
+
+function playBang() {
+    try {
+        audioCtx ||= new (
+            window.AudioContext || window.webkitAudioContext
+        )();
+
+        if (audioCtx.state === "suspended") audioCtx.resume();
+
+        const now = audioCtx.currentTime;
+        const length = Math.floor(audioCtx.sampleRate * .65);
+        const buffer = audioCtx.createBuffer(
+            1, length, audioCtx.sampleRate
+        );
+        const data = buffer.getChannelData(0);
+
+        for (let i = 0; i < length; i++) {
+            data[i] = (Math.random() * 2 - 1) *
+                      Math.pow(1 - i / length, 2.5);
+        }
+
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = "lowpass";
+        filter.frequency.value = 900;
+
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(.4, now);
+        gain.gain.exponentialRampToValueAtTime(.001, now + .65);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        noise.start(now);
+        noise.stop(now + .65);
+    } catch (e) {
+        console.log("Không phát được âm thanh pháo hoa:", e);
+    }
+}
+
+function startFireworks() {
+    // Bắn ngay khi mở thư
+    launchRocket();
+
+    // Tiếp tục bắn pháo hoa định kỳ
+    setInterval(() => {
+        launchRocket();
+        if (Math.random() > .5) {
+            setTimeout(launchRocket, 250);
+        }
+    }, 700);
+
+    animate();
+}
+
+let animationStarted = false;
+
+function animate() {
+    if (animationStarted) return;
+    animationStarted = true;
+
+    function frame() {
+        ctx.clearRect(0, 0, W, H);
+
+        for (let i = rockets.length - 1; i >= 0; i--) {
+            const r = rockets[i];
+            r.y -= r.speed;
+
+            ctx.fillStyle = `hsl(${r.hue},100%,75%)`;
+            ctx.beginPath();
+            ctx.arc(r.x, r.y, 3, 0, Math.PI * 2);
+            ctx.fill();
+
+            if (r.y <= r.targetY) {
+                explode(r.x, r.y, r.hue);
+                rockets.splice(i, 1);
+            }
+        }
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += .035;
+            p.vx *= .99;
+            p.vy *= .99;
+            p.life -= p.decay;
+
+            ctx.globalAlpha = Math.max(0, p.life);
+            ctx.fillStyle = `hsl(${p.hue},100%,65%)`;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+
+            if (p.life <= 0) particles.splice(i, 1);
+        }
+
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(frame);
+    }
+
+    requestAnimationFrame(frame);
+}
+
+// BÓNG BAY
+function launchBalloon() {
+    const emojis = ["🎈", "💖", "🎈", "💗", "🎉"];
+
+    emojis.forEach((emoji, i) => {
+        const b = document.createElement("div");
+        b.className = "balloon";
+        b.textContent = emoji;
+        b.style.left = (i * 19 + 4) + "%";
+        b.style.animationDelay = (i * .3) + "s";
+        document.body.appendChild(b);
+    });
+}
+</script>
+
+</body>
+</html>
